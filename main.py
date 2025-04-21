@@ -1,5 +1,4 @@
-from cleaner import DeleteDuplicates 
-from cleaner import SplitByOperation
+from cleaner import DeleteDuplicates, SplitByOperation
 
 def main():
     df_path = "var2.csv"
@@ -11,6 +10,7 @@ def main():
     cleaned_data = cleaner.data
     cleaned_data.to_csv("cleaned_var2.csv", index=False)
     print("Удалены дубликаты, сохранено как cleaned_var2.csv")
+    print(f"Удалено {cleaner.removed_rows} повторяющихся строк")
     
     # Разделяем датасет по типу операции через `~`
     splitter = SplitByOperation("cleaned_var2.csv")
@@ -21,6 +21,7 @@ def main():
 
 if __name__ == "__main__":
     main()
+
 
 
 

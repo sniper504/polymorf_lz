@@ -13,8 +13,10 @@ class DeleteDuplicates(Cleaner):
     def clean(self):
         return self.data.drop_duplicates()
 
-    def __invert__(self):  # Унарный оператор `~` удаляет дубликаты
+    def __invert__(self):  # Унарный оператор `~` для удаления дубликатов
+        initial_rows = len(self.data)  # До удаления
         self.data = self.data.drop_duplicates()
+        self.removed_rows = initial_rows - len(self.data)  # Сколько строк удалено
         return self
 
 class SplitByOperation(Cleaner):
@@ -30,9 +32,5 @@ class SplitByOperation(Cleaner):
 
         return separated_files
 
-    def __invert__(self):  
+    def __invert__(self):  # `~` теперь отвечает за разделение датасета
         return self.clean()
-
-
-
-
